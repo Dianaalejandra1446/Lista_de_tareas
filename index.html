@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Lista de Tareas</title>
+</head>
+<body>
+    <div class="titulo">
+        <h1>Lista de Tareas</h1>
+    </div>
+    <div class="lista redondeada">
+        <div class="fecha">
+            <div class="fechaderecha">
+                <div id="numerofecha"></div>
+                <div>
+                    <div id="fechaMes"></div>
+                    <div id="fechaAño"></div>
+                </div>
+            </div>
+            <div id="textoFecha"></div>
+        </div>
+        <form onsubmit="addNewTask(event)"><!--  -->
+            <input type="text" name="taskText" autocomplete="off" placeholder="Nueva Tarea" class="redondeada">
+            <button type="submit" class="añadirBotonTarea">+</button>
+            <button type="button" class="OrdenarBoton redondeada" onclick="renderOrderedTask">Ordenar</button>
+        </form>
+        <div id="tasksContainer"></div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
