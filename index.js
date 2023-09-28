@@ -5,7 +5,7 @@ const mesFecha = document.getElementById('fechaMes');
 const añoFecha = document.getElementById('fechaAño');
 
 //Contenedor de Tareas
-const taskContainer = document.getElementById('tasksContainer')
+const tasksContainer = document.getElementById('tasksContainer')
 
 const setDate = () => {
     const date = new Date();
@@ -22,7 +22,7 @@ const addNewTask = event => {
     task.classList.add('task', 'redondeada');
     task.addEventListener('click',changeTaskState)
     task.textContent = value;//Se agrega lo que el user ingresa
-    taskContainer.prepend(task);//Cada elemento se va agregando arriba
+    tasksContainer.prepend(task);//Cada elemento se va agregando arriba
     event.target.reset();//cada vez que se agregue una tarea el input se limpia
 };
 const changeTaskState = event => { //Cuando se hace click en una tarea
@@ -30,14 +30,24 @@ const changeTaskState = event => { //Cuando se hace click en una tarea
 };
 
 const order = () => {
-    const done = []; //Tareas hechas,arrays o listas
-    const toDo = []; //Tareas por hacer,arrays o listas
-    taskContainer.childNodes.forEach( el => { //accedemos alos hijos del taskContainer
-    el.classList.contains('done')? done.push(el) : toDo.push(el)//si el elemento contiene la clase se agrega al array done pero si no se agrega al array toDo-- (push agrega elementos al final del array) --
-    return [...toDo,...done]; //primero devuelve el toDo y despues Done
-    })
-}
-const renderOrderedTask = () =>{
-    order().forEach(el => taskContainer.appendChild(el))//tomamos el elemento y lo ponemos uno por uno en el taskContainer
-}
+    const done = []; // Tareas hechas
+    const toDo = []; // Tareas por hacer
+
+    tasksContainer.childNodes.forEach(el => {
+        el.classList.contains('done') ? done.push(el) : toDo.push(el);
+    });
+
+    return [...toDo, ...done];
+};
+const renderOrderedTask = () => {
+    const orderedTasks = order();
+
+    tasksContainer.innerHTML = ''; // Limpiamos el contenedor antes de añadir las tareas ordenadas
+
+    orderedTasks.forEach(el => {
+        tasksContainer.appendChild(el);
+    });
+};
+    //tomamos el elemento y lo ponemos uno por uno en el taskContainer
+
 setDate();
